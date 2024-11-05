@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-const { scheduleInfos } = require('../../sequelize/models')
+const { scheduleinfos:scheduleInfos } = require('../../sequelize/models')
 const { v4: uuidv4 } = require('uuid');
 const { Op } = require('sequelize');
 
@@ -45,7 +45,7 @@ router.post('/read', async function(req, res) {
     res.status(200).json(schedules);
   } catch (err) {
     console.error(err);
-    res.status(500).json({ message: '查询数据时发生错误' });
+    res.status(500).json({ message: '查询数据时发生错误' , err});
   }
 });
 

@@ -407,7 +407,7 @@ min-width: 600px;
 max-width: 800px;
 transform: translateX(-50%);
 background-color: #DCDFE6;
-z-index: 100;
+z-index: 10001;
 padding: 1em;
 }
 </style>

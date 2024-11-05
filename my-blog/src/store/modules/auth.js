@@ -45,8 +45,6 @@ export default {
       try {
         const response = await Vue.prototype.$axios.post('/api/user/auth/getUserInfo');
         if(response.status === 200){
-          console.log('获取用户信息成功')
-          console.log(response.data)
           commit('SET_USER', response.data.userInfo);
           commit('SET_PROFILE_URL', response.data.userBaseInfo.profileUrl);
           commit('SET_USERNAME', response.data.userBaseInfo.name);

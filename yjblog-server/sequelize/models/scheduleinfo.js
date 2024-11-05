@@ -21,7 +21,7 @@ module.exports = (sequelize, DataTypes) => {
     userId: DataTypes.INTEGER // 添加 userId 字段
   }, {
     sequelize,
-    modelName: 'scheduleInfos',
+    modelName: 'scheduleinfos',
   });
   return scheduleInfo;
 };

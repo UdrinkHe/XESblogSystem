@@ -2,14 +2,16 @@
   <div id = "app">
       <div class="bgContainer"></div>
       <topNavigation v-if="showNavigation"></topNavigation>
-      <div class="mainContainer">
+      <div class="mainContainer mt10">
         <router-view v-if="hasUserInfo || toAuth"></router-view>
       </div>
+      <div class="black-bg" v-show="isBgBlack"></div>
   </div>
 </template>
 
 <script>
 import topNavigation from '@/components/normalComponents/topNavigation.vue';
+import { mapState } from 'vuex';
 export default {
   name: 'App',
   components: {
@@ -24,7 +26,8 @@ export default {
     },
     hasUserInfo(){
       return this.$store.getters['auth/user']
-    }
+    },
+    ...mapState('pageStatus', ['isBgBlack'])
   },
   methods:{
     async getUserInfo(){
@@ -35,7 +38,7 @@ export default {
         console.log('没有用户信息，我去获取一个')
         await this.$store.dispatch('auth/fetchUser');//获取用户信息
       }
-    }
+    },
   },
   created() {
     this.getUserInfo()
@@ -52,8 +55,15 @@ export default {
   z-index: -1;
 }
 .mainContainer {
-  width: 100%;
-  margin-top: 10px;
   min-width: 1000px;
 }
+.black-bg{
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 10000;
+    }
 </style>

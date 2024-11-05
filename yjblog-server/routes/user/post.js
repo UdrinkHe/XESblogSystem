@@ -25,7 +25,7 @@ const upload = multer({ storage }); // 创建 multer 实例
 
 // 处理用户上传的图片，返回图片的 url
 router.post('/uploadImage', upload.single('img'), (req, res) => {
-    const url = `http://localhost:3000/public/images/postImg/${req.file.filename}`; // 获取文件名
+    const url = `http://111.229.128.182:30001/public/images/postImg/${req.file.filename}`; // 获取文件名
     res.status(200).json({ url }); // 返回文件的 URL
 });
 //删除图片

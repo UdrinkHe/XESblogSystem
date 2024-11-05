@@ -5,12 +5,11 @@ const {v4: uuidv4} = require('uuid')
 const multer = require('multer')
 const path = require('path')
 
-console.log(UserInfo)
 // 创建用户信息
 const createUserWhenRegister= async function (username,authId) {
     try {
         const id = uuidv4()
-        const userInfoData = await UserInfo.create({name:username,authId,id,sex:'其他',profileUrl:'http://localhost:3000/public/images/userProfile/noProfile.jpg'});
+        const userInfoData = await UserInfo.create({name:username,authId,id,sex:'其他',profileUrl:'http://111.229.128.182:30001/public/images/userProfile/noProfile.jpg'});
     } catch (error) {
         console.log(error)
     }
@@ -41,7 +40,7 @@ const upload = multer({ storage }); // 创建 multer 实例
 router.post('/updateUserProfile',upload.single('avatar'),async function (req,res){
     try {
         const authId = req.body.authId
-        const url = `http://localhost:3000/public/images/userProfile/${req.file.filename}`; // 获取文件名
+        const url = `http://111.229.128.182:30001/public/images/userProfile/${req.file.filename}`; // 获取文件名
         await UserInfo.update({profileUrl:url},{where:{authId}})
         res.status(200).json({profileUrl:url})
     } catch (error) {

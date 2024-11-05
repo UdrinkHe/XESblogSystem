@@ -8,6 +8,11 @@ import "element-ui/lib/theme-chalk/index.css";
 import './css/common.css'
 import { mavonEditor } from 'mavon-editor';
 import 'mavon-editor/dist/css/index.css'; // 引入样式
+//vuex绑定
+import domStatus from './js/vuex/domStatus';//绑定到全局方法里
+Vue.prototype.$domStatus = domStatus;
+import userInfo from './js/vuex/userInfo';//绑定到全局方法里
+Vue.prototype.$userInfo = userInfo;
 
 Vue.config.productionTip = false
 axios.defaults.baseURL = '/'

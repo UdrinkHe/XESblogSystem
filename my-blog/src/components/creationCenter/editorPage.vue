@@ -147,6 +147,8 @@
                   this.$message.success('发布文章成功')
                   this.articleId = res.data.id
                   this.articleStatus = 1
+                  //发布完之后关闭页面,不是跳转
+                  this.$router.go(0)
                 }
               }).catch(err => {
                 console.log(err)

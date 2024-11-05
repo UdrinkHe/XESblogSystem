@@ -1,6 +1,6 @@
 <template>
-<div id="mySchedule">
-    <div class="nowAndHistorySchedule">
+<div id="mySchedule" class="p20">
+    <div class="nowAndHistorySchedule flex-display">
         <div :class="{isChoose:nowAndHistoryChoose[0]}" @click="changeNowAndHistoryChoose(0)">今日日程</div>
         <span>|</span>
         <div :class="{isChoose:nowAndHistoryChoose[1]}" @click="changeNowAndHistoryChoose(1)">日程管理</div>
@@ -406,7 +406,7 @@ methods: {
             this.editorData.visible = false
             //将新增数据添加到数据库
             let {id:uid,hourlyTask,name,dateStr} = this.editorData
-            this.$axios.post('api/user/schedule/create',{uid,hourlyTask,name,dateStr}).then(()=>{
+            this.$axios.post('api/user/schedule/create',{uid,hourlyTask,name,dateStr,userId:this.user().uid}).then(()=>{
                 this.getScheduleData()
             })
         }
@@ -507,12 +507,9 @@ created(){
 
 <style lang="scss" scoped>
 #mySchedule {
-    padding: 20px;
     .nowAndHistorySchedule {
-        width: 200px;
-        display: flex;
+        width: 150px;
         margin: 0 auto;
-        justify-content: center;
         >div {
             cursor: pointer;
         }
@@ -585,7 +582,7 @@ created(){
     max-width: 800px;
     transform: translateX(-50%);
     background-color: #DCDFE6;
-    z-index: 100;
+    z-index: 10001;
     padding: 1em;
     >.addOnehourlyTask{
         position: absolute;

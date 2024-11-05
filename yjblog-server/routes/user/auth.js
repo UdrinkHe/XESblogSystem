@@ -4,6 +4,7 @@ var express = require('express');
 var router = express.Router();
 var { auth } = require('../../sequelize/models')
 var {createUserWhenRegister,getUserInfo} = require('./userInfo')
+var {createDefaultFolder} = require('./postCollection')
 
 
 const crypto = require('crypto');
@@ -84,7 +85,8 @@ router.post('/register', async function (req, res) {
                 createdAt:new Date(),
                 updatedAt:new Date()
             })
-            await createUserWhenRegister(username,newAuth.uid)
+            await createUserWhenRegister(username,newAuth.uid)//创建新的用户信息
+            await createDefaultFolder(newAuth.uid)//创建默认收藏夹
             res.status(200).json({message:'注册成功'})
         }
         else{
@@ -120,6 +122,8 @@ router.post('/login', async (req, res) => {
 
     // 从auth表中查找用户
     const user = await auth.findOne({ where: { username } });
+
+    console.log(user)
 
     if (!user) {
       return res.status(401).json({ message: '用户名或密码错误' });

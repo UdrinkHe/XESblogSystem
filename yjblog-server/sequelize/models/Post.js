@@ -1,5 +1,18 @@
+'use strict';
+const { Model } = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
-    const Post = sequelize.define('Post', {
+    class Post extends Model {
+        static associate(models) {
+            // 现有的关联
+            Post.hasMany(models.CollectionRecord, {
+                foreignKey: 'postId', // CollectionRecord 中的 postId
+                sourceKey: 'id', // Post 中的 id
+                as: 'CollectionRecords' // 关联别名
+            });
+        }
+    }
+    Post.init({
         id: {
             type: DataTypes.UUID,
             defaultValue: DataTypes.UUIDV4,
@@ -48,11 +61,10 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false,
             defaultValue: 0,
         },
-    },
-    {
+    }, {
+        sequelize,
+        modelName: 'Post',
         tableName: 'posts',
-    }
-);
-
+    });
     return Post;
 };

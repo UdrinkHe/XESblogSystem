@@ -12,6 +12,7 @@ import creationManagement from '@/components/creationCenter/creationManagement.v
 import ViewPage from '@/components/creationCenter/viewPage.vue'
 import personalCenter from '@/components/mainPage/personalCenter.vue'
 import baseInfo from '@/components/userInfo/baseInfo.vue'
+import myCollection from '@/components/userInfo/myCollection.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -99,9 +100,11 @@ const routes = [
                 path : 'baseInfo',
                 name : 'baseInfo',
                 component : baseInfo,
-                meta : {
-                    requiresAuth : true
-                }
+            },
+            {
+                path : 'myCollection',
+                name : 'myCollection',
+                component : myCollection
             }
         ]
     },

@@ -38,7 +38,7 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: true,
         },
     }, {
-        tableName: 'userInfo', // 指定表名
+        tableName: 'userinfo', // 指定表名
         timestamps: true, // 自动添加 createdAt 和 updatedAt 字段
     });
 

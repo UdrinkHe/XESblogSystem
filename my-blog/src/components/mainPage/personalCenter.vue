@@ -26,6 +26,10 @@ data() {
             {
                 name: '账号绑定',
                 path: '/personalCenter/accountBinding'
+            },
+            {
+                name: '我的收藏',
+                path: '/personalCenter/myCollection'
             }
         ]
     }

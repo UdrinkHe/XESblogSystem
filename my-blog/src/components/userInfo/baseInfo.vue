@@ -52,7 +52,6 @@
             </div>
         </div>
         <input  ref="fileInput" style="visibility: hidden; position: absolute; top: 0; left: 0; width: 0; height: 0;" type="file" @change="onFileChange" accept="image/*" />
-        <div class="black-bg" v-if="showCropper"></div>
         <div class="avatar-cropper-container" v-if="showCropper">
             <avatar-cropper
             :image="imageToCrop"
@@ -108,6 +107,7 @@ export default {
         },
         closeCropper(){
             this.showCropper = false;
+            this.$domStatus.setBgBlack.call(this, false)
         },
         onFileChange(event) {
             const file = event.target.files[0];
@@ -158,6 +158,7 @@ export default {
                         // 将调整后的图像转换为 Base64
                         this.imageToCrop = canvas.toDataURL('image/jpeg'); // 或 'image/png'
                         this.showCropper = true; // 显示裁剪器
+                        this.$domStatus.setBgBlack.call(this,true)
                     };
                 };
                 reader.readAsDataURL(file); // 读取文件为 Base64
@@ -165,7 +166,7 @@ export default {
         },
         uploadAvatar(data) {
             this.showCropper = false;
-
+            this.$domStatus.setBgBlack.call(this, false)
              // 将 Base64 转换为 File 对象
             const base64Data = data.split(',')[1]; // 获取 Base64 数据部分
             const byteCharacters = atob(base64Data); // 解码 Base64
@@ -310,20 +311,12 @@ export default {
             }
         }
     }
-    .black-bg{
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
-        background-color: rgba(0, 0, 0, 0.5);
-    }
     .avatar-cropper-container{
         position: absolute;
         top: 0;
         left: 50%;
         transform: translateX(-50%);
-        z-index: 1000;
+        z-index: 10001;
     }
 }
 </style>
